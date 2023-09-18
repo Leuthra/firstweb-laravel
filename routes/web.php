@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +20,5 @@ Route::get('/', function () {
 Route::get('/portfolio', function () {
     return view('pages.portfolio');
 });
+
+Route::post('portfolio', [ContactController::class, 'store'])->name('contact.us.store');

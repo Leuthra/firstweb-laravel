@@ -465,29 +465,49 @@
 
           </div>
 
+          @if(Session::has('success'))
+                            <div class="alert alert-success">
+                                {{Session::get('success')}}
+                            </div>
+           @endif
+
+          <div id="contact-message" class="alert alert-success" style="display: none;"></div>
           {{-- contact yang harus bisa crud --}}
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="{{ route('contact.us.store') }}" method="post" role="form" class="php-email-form" id="contactUSForm">
+              {{ csrf_field() }}
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="name">Nama lengkap</label>
-                  <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
+                  @if ($errors->has('name'))
+                      <span class="text-danger">{{ $errors->first('name') }}</span>
+                  @endif
                   <div class="validate"></div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name">Email anda</label>
-                  <input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+                  <input type="email" class="form-control" name="email" value="{{ old('email') }}" />
+                  @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                  @endif
                   <div class="validate"></div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <input type="text" class="form-control" name="subject" id="subject" value="{{ old('subject') }}" />
+                @if ($errors->has('subject'))
+                  <span class="text-danger">{{ $errors->first('subject') }}</span>
+                @endif
                 <div class="validate"></div>
               </div>
               <div class="form-group">
                 <label for="name">pesan</label>
-                <textarea class="form-control" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
+                <textarea name="message" rows="3" class="form-control">{{ old('message') }}</textarea>
+                @if ($errors->has('message'))
+                  <span class="text-danger">{{ $errors->first('message') }}</span>
+                @endif
                 <div class="validate"></div>
               </div>
               <div class="mb-3">
@@ -514,7 +534,7 @@
     <script src="{{ asset('css/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('css/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('css/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('css/vendor/php-email-form/validate.js') }}"></script>
+    
     <script src="{{ asset('css/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('css/vendor/counterup/counterup.min.js') }}"></script>
     <script src="{{ asset('css/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
@@ -525,6 +545,7 @@
 
     <!-- MAIN JS -->
     <script src="{{ asset('js/portfolio.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
 @endsection
 
 @stop
