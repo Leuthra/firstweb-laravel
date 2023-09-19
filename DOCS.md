@@ -64,6 +64,9 @@ public static function boot() {
 }
 ```
 
+Note:
+jika kamu tidak memiliki template SQL nya, kamu bisa menggunakan Template SQL yang ada di sini untuk di import ke database mu!
+
 ## Kontribusi
 Jika Anda ingin berkontribusi pada pengembangan aplikasi ini, silakan buat pull request dan kami akan dengan senang hati mempertimbangkannya.
 
